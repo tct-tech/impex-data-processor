@@ -1,3 +1,9 @@
+/**
+ * @Author: Your name
+ * @Date:   2023-08-07 11:10:21
+ * @Last Modified by:   Your name
+ * @Last Modified time: 2023-08-07 14:32:29
+ */
 import trimData from "./trimData";
 import transposeData from "./transposeData";
 import removeEmptyElements from "./removeEmptyElements";
@@ -26,7 +32,7 @@ const cleanupData = (file, steps) => {
     const cleanYdev = removeEmptyElements(Ydev);
     const cleanDia = removeEmptyElements(Dia);
 
-    return[cleanXdev, cleanYdev, cleanDia];
+    return[cleanXdev, cleanYdev, cleanDia, trimmedData.length];
 }
 
 export default cleanupData;

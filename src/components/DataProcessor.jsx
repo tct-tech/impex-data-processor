@@ -12,10 +12,20 @@ import * as XLSX from "xlsx";
 
 const DataProcessor = (props) => {
     const processFile = () => {
+        if(!props.file || !props.steps || !props.specLimit){
+            alert('Missing parameters, all fields are required');
+            return;
+        }
+
         const data = cleanupData(props.file, props.steps);
         const cleanXdev = data[0];
         const cleanYdev = data[1];
         const cleanDia = data[2];
+
+        if(data[3] % props.steps !== 0){
+            alert('Please input a proper Step number.');
+            return;
+        }
         
         // 1. Calculate sample size for each array (result#1)
         const XdevSampleSize = calSampleSize(cleanXdev);
@@ -92,7 +102,7 @@ const DataProcessor = (props) => {
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "raw data");
         
-        XLSX.writeFile(workbook, "RawData.xlsx");
+        XLSX.writeFile(workbook, "_ImpexData.xlsx");
     }
 
     return(
