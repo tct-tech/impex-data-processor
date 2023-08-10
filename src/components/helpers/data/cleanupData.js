@@ -2,17 +2,19 @@
  * @Author: Your name
  * @Date:   2023-08-07 11:10:21
  * @Last Modified by:   Your name
- * @Last Modified time: 2023-08-07 14:32:29
+ * @Last Modified time: 2023-08-10 15:24:10
  */
-import trimData from "./trimData";
+import trimData from "./trimData"; 
 import transposeData from "./transposeData";
 import removeEmptyElements from "./removeEmptyElements";
+import filterData from "./filterData";
 
-const cleanupData = (file, steps) => {
+const cleanupData = (file, steps, tolP) => {
     // Keeping only column 5(Xdev), 10(Ydev), 14(Dia)
     let trimmedData = trimData(file);
     // Transpose matrix
     let sortedData = transposeData(trimmedData);
+
     // Split the sortedData into N chunks with props.steps
     let chunkSize = Number(steps);
     let Xdev = []; 
@@ -27,10 +29,17 @@ const cleanupData = (file, steps) => {
         Ydev.push(YdevChunk);
         Dia.push(DiaChunk);
     }
+
+    // Filter Data 
+    const filteredData = filterData(Xdev, Ydev, Dia, tolP);
+    const filteredXdev = filteredData[0];
+    const filteredYdev = filteredData[1];
+    const filteredDia = filteredData[2];
+
     // Remove empty elements before doing calculations
-    const cleanXdev = removeEmptyElements(Xdev);
-    const cleanYdev = removeEmptyElements(Ydev);
-    const cleanDia = removeEmptyElements(Dia);
+    const cleanXdev = removeEmptyElements(filteredXdev);
+    const cleanYdev = removeEmptyElements(filteredYdev);
+    const cleanDia = removeEmptyElements(filteredDia);
 
     return[cleanXdev, cleanYdev, cleanDia, trimmedData.length];
 }

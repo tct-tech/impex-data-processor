@@ -11,13 +11,14 @@ import calSTDEV from "./helpers/calculation/calSTDEV";
 import * as XLSX from "xlsx";
 
 const DataProcessor = (props) => {
+    const tolP = 0.20; // Percentage Tolerance for CMM Dia (+/-)
     const processFile = () => {
         if(!props.file || !props.steps || !props.specLimit){
             alert('Missing parameters, all fields are required');
             return;
         }
 
-        const data = cleanupData(props.file, props.steps);
+        const data = cleanupData(props.file, props.steps, tolP);
         const cleanXdev = data[0];
         const cleanYdev = data[1];
         const cleanDia = data[2];
@@ -70,7 +71,7 @@ const DataProcessor = (props) => {
         const RDS_CPK = calCPK(spec, RDS_Avg, RDS_STDEV);
         const cpk = [XDS_CPK, YDS_CPK, RDS_CPK];
 
-        console.log([sampleSize, max, avg, STDEV, avg4s, cpk]);
+        // console.log([sampleSize, max, avg, STDEV, avg4s, cpk]);
         downloadExcelFile([sampleSize, max, avg, STDEV, avg4s, cpk]);
     }
 
@@ -86,7 +87,7 @@ const DataProcessor = (props) => {
         let row8 = ['CPK'];
         for(let i = 0; i < data[0].length; i++){
             row1.push(props.steps * i + 1 + '-' + props.steps * (i + 1), '', '');
-            row2.push(data[0][i], '', '');
+            row2.push(data[0][i] + '/' + props.steps, '', '');
             row3.push('X-Axis', 'Y-Axis', 'Radial');
             row4.push(data[1][0][i], data[1][1][i], data[1][2][i]);
             row5.push(data[2][0][i], data[2][1][i], data[2][2][i]);
