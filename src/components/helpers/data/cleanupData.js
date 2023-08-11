@@ -2,7 +2,7 @@
  * @Author: Your name
  * @Date:   2023-08-07 11:10:21
  * @Last Modified by:   Your name
- * @Last Modified time: 2023-08-10 15:24:10
+ * @Last Modified time: 2023-08-11 11:31:52
  */
 import trimData from "./trimData"; 
 import transposeData from "./transposeData";
@@ -31,7 +31,7 @@ const cleanupData = (file, steps, tolP) => {
     }
 
     // Filter Data 
-    const filteredData = filterData(Xdev, Ydev, Dia, tolP);
+    const filteredData = filterData(removeEmptyElements(Xdev), removeEmptyElements(Ydev), removeEmptyElements(Dia), tolP);
     const filteredXdev = filteredData[0];
     const filteredYdev = filteredData[1];
     const filteredDia = filteredData[2];

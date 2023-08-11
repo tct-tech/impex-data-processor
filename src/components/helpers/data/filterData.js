@@ -2,7 +2,7 @@
  * @Author: Your name
  * @Date:   2023-08-10 15:24:37
  * @Last Modified by:   Your name
- * @Last Modified time: 2023-08-10 15:24:50
+ * @Last Modified time: 2023-08-11 11:30:51
  */
 import calMedian from '../calculation/calMedian';
 const isDiaValid = (value, Dia, tolP) => {
@@ -30,7 +30,7 @@ const filterData = (Xdev, Ydev, Dia, tolP) => {
         let _filteredXdev = [];
         let _filteredYdev = [];
         let _filteredDia = [];
-        for(let j = 0; j < Xdev[0].length; j++){
+        for(let j = 0; j < Xdev[i].length; j++){
             if(
                 isDevValid(Xdev[i][j], Dia[i])
                 && isDevValid(Ydev[i][j], Dia[i])
