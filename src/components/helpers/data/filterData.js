@@ -2,7 +2,7 @@
  * @Author: Your name
  * @Date:   2023-08-10 15:24:37
  * @Last Modified by:   Your name
- * @Last Modified time: 2023-08-11 11:30:51
+ * @Last Modified time: 2023-08-16 10:39:31
  */
 import calMedian from '../calculation/calMedian';
 const isDiaValid = (value, Dia, tolP) => {
@@ -17,7 +17,7 @@ const isDiaValid = (value, Dia, tolP) => {
 }
 
 const isDevValid = (value, Dia) => {
-    const avgDia = Dia.reduce((sum, ele) => sum + Number(ele), 0) / Dia.length;   
+    const avgDia = Dia.reduce((sum, ele) => sum + Number(ele), 0) / Dia.length / 1000;   
     return avgDia - Math.abs(value) > 0;
 }
 
@@ -38,7 +38,7 @@ const filterData = (Xdev, Ydev, Dia, tolP) => {
             ){
                 _filteredXdev.push(Xdev[i][j]);
                 _filteredYdev.push(Ydev[i][j]);
-                _filteredDia.push(Dia[i][j]);
+                _filteredDia.push(Dia[i][j] / 1000);
             }else{
                 // replace out-of-tolerance data to ''
                 _filteredXdev.push('');
