@@ -85,6 +85,11 @@ const DataProcessor = (props) => {
         let row6 = ['Std Deviation'];
         let row7 = ['Avg + 4S'];
         let row8 = ['CPK'];
+        let row9 = [''];
+        let row10 = [''];
+        let row11 = [];
+        let row12 = [];
+
         for(let i = 0; i < data[0].length; i++){
             row1.push(props.steps * i + 1 + '-' + props.steps * (i + 1), '', '');
             row2.push(data[0][i] + '/' + props.steps, '', '');
@@ -94,9 +99,12 @@ const DataProcessor = (props) => {
             row6.push(data[3][0][i], data[3][1][i], data[3][2][i]);
             row7.push(data[4][0][i], data[4][1][i], data[4][2][i]);
             row8.push(data[5][0][i], data[5][1][i], data[5][2][i]);
+
+            row11.push(data[0][i] + '/' + props.steps);
+            row12.push(Math.min(data[5][0][i], data[5][1][i], data[5][2][i]));
         }
         
-        aoa.push(row1, row2, row3, row4, row5, row6, row7, row8);
+        aoa.push(row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12);
          /* create worksheet */
         const worksheet = XLSX.utils.aoa_to_sheet(aoa);
         /* create workbook and export */
