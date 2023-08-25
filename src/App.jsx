@@ -5,7 +5,7 @@ import './styles/styles.css';
 function App() {
   return (
     <>
-      <h1 className="header">TCT Impex Data Processor</h1>
+      <h1 className="header">Impex Data Processor</h1>
       <FileSpecInput/>
     </>
   )
