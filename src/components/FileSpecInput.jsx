@@ -19,6 +19,7 @@ const FileSpecInput = () => {
         const jsonData = XLSX.utils.sheet_to_json(worksheet, {
             header: 1,
             defval: '',
+            blankrows: false
         });
 
         setSelectedFile(jsonData);
